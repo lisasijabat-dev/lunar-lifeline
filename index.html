@@ -7,71 +7,87 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- STEP 1 OF PRE-FLIGHT BRIEFING: NAME YOUR CREW -->
+  <!-- STEP 1: MISSION STORY & CREW NAMING (NOTES 1 & 4) -->
   <div id="setup-modal" class="modal">
     <div class="modal-content">
-      <span class="speaker-pill">STEP 1 OF 2: YOUR CREW</span>
-      <h2 style="margin: 10px 0 6px;">Name Your Junior Astronauts</h2>
-      <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 14px;">
-        Type names for your three astronauts before landing on the Moon (or leave blank to use default crew names).
+      <span class="speaker-pill">STEP 1 OF 2: YOUR MISSION</span>
+      <h2 style="margin: 10px 0 8px;">Your Mission on the Moon</h2>
+      <p style="color: #e2e8f0; font-size: 0.92rem; line-height: 1.5; margin-bottom: 10px;">
+        You are leading an astronaut crew at <b>Shackleton Crater</b> on the Moon's South Pole. Your main goal is to <b>collect 50 points of Moon data and samples</b> to send back to Earth for scientists to research!
+      </p>
+      <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.45; margin-bottom: 14px;">
+        <b>The Challenge:</b> Surviving on the Moon is tough. Every experiment uses battery power and water, and there is no air or magnetic shield outside to protect your crew. Name your three astronauts below to begin:
       </p>
       <div class="input-group">
-        <label>Commander (Power & Heaters)</label>
-        <input type="text" id="input-crew-1" placeholder="Enter Commander's name" maxlength="16" />
+        <label>Commander (Power & Base Systems)</label>
+        <input type="text" id="input-crew-1" placeholder="Type first name (e.g. Lisa)" maxlength="14" />
       </div>
       <div class="input-group">
-        <label>Flight Engineer (Air & Roof Shield)</label>
-        <input type="text" id="input-crew-2" placeholder="Enter Flight Engineer's name" maxlength="16" />
+        <label>Engineer (Air & Roof Radiation Shield)</label>
+        <input type="text" id="input-crew-2" placeholder="Type first name" maxlength="14" />
       </div>
       <div class="input-group">
-        <label>Space Botanist (Greenhouse & Water)</label>
-        <input type="text" id="input-crew-3" placeholder="Enter Space Botanist's name" maxlength="16" />
+        <label>Botanist (Greenhouse & Water Recycling)</label>
+        <input type="text" id="input-crew-3" placeholder="Type first name" maxlength="14" />
       </div>
-      <button id="to-tutorial-btn" class="btn-primary">Next: How to Play & Mission Goals</button>
+      <button id="to-tutorial-btn" class="btn-primary">Next: How to Play & Dangers to Watch</button>
     </div>
   </div>
 
-  <!-- STEP 2 OF PRE-FLIGHT BRIEFING: TOOLS & OBJECTIVES POPUP -->
+  <!-- STEP 2: OBJECTIVES, CHOICES, TOOLS & DANGERS (NOTES 2 & 5) -->
   <div id="tutorial-modal" class="modal hidden">
     <div class="modal-content">
       <span class="speaker-pill">STEP 2 OF 2: FLIGHT TRAINING</span>
-      <h2 style="margin: 10px 0 12px;">Your Tools & Mission Goals</h2>
+      <h2 style="margin: 10px 0 12px;">How to Survive & Gather Data</h2>
 
       <div class="guide-card">
-        <strong>1. Your Main Tool: The Water Lifeline Slider</strong>
-        <p>You only have ONE water tank! Slide left to turn water into <b>Breathable Air</b>. Slide right to pump water into the <b>Roof Shield</b> to block dangerous space rays from solar storms.</p>
-      </div>
-
-      <div class="guide-card" style="border-left-color: #eab308;">
-        <strong style="color: #eab308;">2. Tough Choices (Nothing Is Free!)</strong>
-        <p>Every day (Sol) brings a real Moon problem. Each choice costs Power, Water, or Health. Watch your astronauts' faces and health bars—if anyone runs out, the mission ends!</p>
+        <strong>1. Making Choices (Your Main Action)</strong>
+        <p>Each day (Sol), you must choose how to run the base so you can keep doing science. Every choice has a real trade-off—gaining science or power always costs something else!</p>
       </div>
 
       <div class="guide-card" style="border-left-color: #22c55e;">
-        <strong style="color: #22c55e;">3. How to Win</strong>
-        <p>Keep all 3 astronauts safe for <b>7 Moon Days (Sols)</b> AND collect at least <b>50 Science Points</b> before your rescue rocket arrives.</p>
+        <strong style="color: #22c55e;">2. Your Tool: The Water Lifeline Slider</strong>
+        <p>You only have ONE water tank. Slide left to send water to the <b>Air Maker (Electrolysis)</b> so your crew can breathe. Slide right to pump water into the <b>Roof Shield</b> to block space radiation.</p>
       </div>
 
-      <button id="start-mission-btn" class="btn-primary">Land on the Moon (Start Sol 1)</button>
+      <div class="guide-card" style="border-left-color: #ef4444;">
+        <strong style="color: #ef4444;">3. Dangers to Watch Out For</strong>
+        <p><b>Space Rays (Solar Flares):</b> Giant blasts from the Sun hit the Moon with radiation—keep your Roof Shield at 60% or higher during storms! <b>Freezing Shadows & Low Air:</b> If Power, Water, or any astronaut's health bar hits 0%, you must evacuate without finishing your research.</p>
+      </div>
+
+      <button id="start-mission-btn" class="btn-primary">Land on the Moon (Start Day 1)</button>
+    </div>
+  </div>
+
+  <!-- DECISION EVALUATION POPUP AFTER EVERY CHOICE (NOTE 6) -->
+  <div id="eval-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="speaker-pill" id="eval-badge">MISSION LOG EVALUATION</span>
+      <h2 id="eval-title" style="margin: 10px 0 8px;">Good Choice!</h2>
+      <p id="eval-text" style="color: #e2e8f0; font-size: 0.96rem; line-height: 1.55;"></p>
+      <div class="fact-box" id="eval-fact"></div>
+      <button id="next-sol-btn" class="btn-primary">Continue to Next Day</button>
     </div>
   </div>
 
   <div class="app-container">
-    <!-- COMPACT GAME HUD -->
+    <!-- COMPACT GAME HUD WITH 7-DAY CHECKPOINT TRACK (NOTE 9) -->
     <header class="hud-bar">
-      <div class="hud-title"><h1>LUNAR LIFELINE</h1></div>
+      <div class="hud-title">
+        <h1>LUNAR LIFELINE</h1>
+        <div class="checkpoint-track" id="checkpoint-track"></div>
+      </div>
       <div class="hud-meters">
-        <div class="hud-pill" id="sol-counter"><strong>DAY 1 / 7</strong></div>
-        <div class="hud-pill">Power: <strong id="power-val">80%</strong></div>
-        <div class="hud-pill">Water: <strong id="water-val">80%</strong></div>
-        <div class="hud-pill">Science: <strong id="science-val">0 / 50</strong></div>
-        <button id="open-help-btn" class="btn-small">Goals & Rules</button>
+        <div class="hud-pill" id="pill-power">Power: <strong id="power-val">80%</strong></div>
+        <div class="hud-pill" id="pill-water">Water: <strong id="water-val">80%</strong></div>
+        <div class="hud-pill" id="pill-science">Science: <strong id="science-val">0 / 50</strong></div>
+        <button id="open-help-btn" class="btn-small">Goals & Dangers</button>
         <button id="data-mode-btn" class="btn-small">Data: Nov 2026 DONKI</button>
         <button id="judge-modal-btn" class="btn-small">NASA Data Guide</button>
       </div>
     </header>
 
-    <!-- EPISODE-STYLE VISUAL SCENE (3 LIVING FRAMES) -->
+    <!-- EPISODE-STYLE VISUAL SCENE -->
     <section class="story-stage" id="story-stage">
       <div class="stars-layer"></div>
 
@@ -88,36 +104,32 @@
       <div class="cast-row">
         <div class="actor-card" id="actor-card-1">
           <div class="actor-avatar" id="crew-avatar-1"></div>
-          <div class="actor-name-tag" id="crew-name-1">Commander</div>
+          <div class="actor-name-tag" id="crew-name-1">Commander Maya</div>
           <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-1" style="width: 100%"></div></div>
         </div>
 
         <div class="actor-card" id="actor-card-2">
           <div class="actor-avatar" id="crew-avatar-2"></div>
-          <div class="actor-name-tag" id="crew-name-2">Engineer</div>
+          <div class="actor-name-tag" id="crew-name-2">Engineer Leo</div>
           <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-2" style="width: 100%"></div></div>
         </div>
 
         <div class="actor-card" id="actor-card-3">
           <div class="actor-avatar" id="crew-avatar-3"></div>
-          <div class="actor-name-tag" id="crew-name-3">Botanist</div>
+          <div class="actor-name-tag" id="crew-name-3">Botanist Sam</div>
           <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-3" style="width: 100%"></div></div>
         </div>
       </div>
     </section>
 
-    <!-- STORY DIALOGUE & INTERACTIVE DECISIONS -->
+    <!-- STORY DIALOGUE & DESCRIPTIVE CHOICES (NOTE 3) -->
     <section class="dialogue-box">
       <div class="speaker-header">
-        <span class="speaker-pill" id="speaker-name">Commander</span>
-        <h2 class="chapter-title" id="card-title">Day 1: Touchdown on the Moon</h2>
+        <span class="speaker-pill" id="speaker-name">Commander Maya</span>
+        <h2 class="chapter-title" id="card-title">Day 1: Touchdown at Shackleton Crater</h2>
       </div>
 
-      <div class="speech-bubble" id="card-text">
-        "We landed at Shackleton Crater! Sticky Moon dust is everywhere, and we need to line up our solar panels before the freezing dark shadow arrives."
-      </div>
-
-      <div id="turn-feedback" class="outcome-toast hidden"></div>
+      <div class="speech-bubble" id="card-text"></div>
 
       <div class="bottom-controls">
         <div class="slider-panel">
@@ -133,26 +145,21 @@
         </div>
 
         <div class="story-choices">
-          <button class="story-btn" id="choice-a-btn">
-            <strong>Line Up Solar Panels</strong>
-            <span>+20% Power | 0 Science</span>
-          </button>
-          <button class="story-btn" id="choice-b-btn">
-            <strong>Dig Up & Scan Moon Rocks</strong>
-            <span>-10% Power | +15 Science</span>
-          </button>
+          <button class="story-btn" id="choice-a-btn"></button>
+          <button class="story-btn" id="choice-b-btn"></button>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- END-OF-MISSION DEBRIEF MODAL -->
+  <!-- NARRATIVE END-OF-MISSION POPUP (NOTES 8, 10, 12, 13) -->
   <div id="debrief-modal" class="modal hidden">
     <div class="modal-content">
-      <h2 id="debrief-title">Mission Complete</h2>
-      <p id="debrief-subtitle" style="color:#94a3b8; margin-top:4px;">Flight Director Report</p>
-      <ul id="debrief-lessons" class="lessons-list"></ul>
-      <button id="restart-btn" class="btn-primary">Play Again with New Strategy</button>
+      <span class="speaker-pill" id="debrief-badge">MISSION REPORT</span>
+      <h2 id="debrief-title" style="margin-top: 10px;">Mission Complete</h2>
+      <div class="debrief-story" id="debrief-story"></div>
+      <button id="restart-btn" class="btn-primary">Try Again</button>
+      <div class="retry-subtext">Try using a different strategy next!</div>
     </div>
   </div>
 
@@ -160,12 +167,11 @@
   <div id="judge-modal" class="modal hidden">
     <div class="modal-content">
       <h2>NASA Data & Educational Design Guide</h2>
-      <ul class="lessons-list">
-        <li><strong>Age 7–12 Accessibility:</strong> Plain-language dialogue, pre-flight visual onboarding, and emotional crew feedback translate complex ECLSS trade-offs for young learners.</li>
-        <li><strong>Dual-Use Water Trade-Off:</strong> Models real NASA life support constraints where water is split between breathable oxygen (electrolysis) and roof radiation shielding bladders.</li>
-        <li><strong>NASA DONKI API:</strong> Days 3 and 6 use real 2026 Solar Flare events (Nov 7, 2026 M1.2 & Feb 1, 2026 X8.1) to trigger radiation storms.</li>
-        <li><strong>LRO Diviner & OSDR Data:</strong> Models -230°C crater shadows, lunar regolith dust hazards, and space plant growth stress.</li>
-      </ul>
+      <div class="debrief-story" style="font-size: 0.9rem;">
+        <p style="margin-bottom: 8px;"><b>Anti-Oversimplification Design:</b> Uses plain language alongside real NASA terminology (ECLSS, Electrolysis, Regolith, DONKI solar flare classes) and post-decision real-world spaceflight facts.</p>
+        <p style="margin-bottom: 8px;"><b>NASA DONKI API:</b> Days 3 and 6 use real 2026 Solar Flare events (Nov 7, 2026 M1.2 & Feb 1, 2026 X8.1) to drive radiation shielding trade-offs.</p>
+        <p><b>LRO Diviner & OSDR:</b> Models -230°C permanently shadowed crater temperatures, abrasive regolith dust, and lunar plant stress.</p>
+      </div>
       <button id="close-judge-btn" class="btn-primary">Back to Mission</button>
     </div>
   </div>
