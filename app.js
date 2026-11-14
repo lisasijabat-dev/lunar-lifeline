@@ -1,13 +1,13 @@
 let state = {
   sol: 1, maxSols: 7, power: 80, water: 80, health: 100, science: 0, oxygenSplit: 50,
   bestScore: parseInt(localStorage.getItem("lunarBestScore") || "0", 10),
-  crewNames: ["Commander Maya", "Engineer Leo", "Botanist Sam"],
+  crewNames: Array.of("Commander Maya", "Engineer Leo", "Botanist Sam"),
   avatarStyles: Array.of(0, 1, 2),
   liveMode: false, liveFlareLabel: "NASA DONKI: M1.2 Solar Flare (2026-11-07)",
   failReason: "", pendingGameOver: false
 };
 
-const events = [
+const events = Array.of(
   {
     sol: 1, speakerIdx: 0, mode: "normal",
     source: "Source: NASA Artemis ECLSS Baseline", tag: "TEMP: +15°C | SUNLIT CRATER",
@@ -169,7 +169,7 @@ const events = [
       fact: "Fun Space Fact: Launching off the Moon takes much less fuel than launching from Earth because the Moon's gravity is only one-sixth as strong!"
     }
   }
-];
+);
 function getAstronautSVG(styleIdx, mood, suitColor) {
   let eyes = '<circle cx="29" cy="35" r="2.5" fill="#0f172a"/><circle cx="47" cy="35" r="2.5" fill="#0f172a"/>';
   let mouth = '<path d="M30 44 Q38 51 46 44" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>';
@@ -192,7 +192,7 @@ function getAstronautSVG(styleIdx, mood, suitColor) {
 }
 
 function initAvatarPickers() {
-  const colors = ["#38bdf8", "#22c55e", "#facc15"];
+  const colors = Array.of("#38bdf8", "#22c55e", "#facc15");
   for (let slot = 0; slot < 3; slot++) {
     const container = document.getElementById("picker-" + (slot + 1));
     container.innerHTML = "";
@@ -201,7 +201,7 @@ function initAvatarPickers() {
       btn.className = "av-opt" + (state.avatarStyles.at(slot) === st ? " selected" : "");
       btn.innerHTML = getAstronautSVG(st, "good", colors.at(slot));
       btn.onclick = function() {
-        state.avatarStyles[slot] = st;
+        state.avatarStyles.splice(slot, 1, st);
         initAvatarPickers();
       };
       container.appendChild(btn);
@@ -250,12 +250,12 @@ waterSlider.addEventListener("input", function(e) {
 });
 
 function updateCast(isCold) {
-  const hps = [
+  const hps = Array.of(
     Math.max(0, Math.min(100, Math.round((state.health + state.power) / 2))),
     Math.max(0, Math.min(100, state.health)),
     Math.max(0, Math.min(100, Math.round((state.health + state.water) / 2)))
-  ];
-  const suitColors = ["#38bdf8", "#22c55e", "#facc15"];
+  );
+  const suitColors = Array.of("#38bdf8", "#22c55e", "#facc15");
 
   for (let i = 0; i < 3; i++) {
     const num = i + 1;
@@ -382,11 +382,11 @@ document.getElementById("to-tutorial-btn").onclick = function() {
   const n1 = document.getElementById("input-crew-1").value.trim();
   const n2 = document.getElementById("input-crew-2").value.trim();
   const n3 = document.getElementById("input-crew-3").value.trim();
-  state.crewNames = [
+  state.crewNames = Array.of(
     n1 ? "Commander " + n1 : "Commander Maya",
     n2 ? "Engineer " + n2 : "Engineer Leo",
     n3 ? "Botanist " + n3 : "Botanist Sam"
-  ];
+  );
   for (let i = 0; i < 3; i++) {
     document.getElementById("crew-name-" + (i + 1)).textContent = state.crewNames.at(i);
   }
