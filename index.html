@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- WELCOME & 9 UNIQUE AVATAR PICKERS (NOTE 1) -->
   <div id="setup-modal" class="modal">
     <div class="modal-content">
       <h2 style="text-align: center; color: #facc15; font-size: 1.5rem; margin-bottom: 8px;">Welcome Aboard!</h2>
@@ -38,33 +39,46 @@
         </div>
       </div>
 
-      <button id="to-tutorial-btn" class="btn-primary">Next: Mission Guide</button>
+      <button id="to-guide-1-btn" class="btn-primary">Next: Mission Objective</button>
     </div>
   </div>
-  <div id="tutorial-modal" class="modal hidden">
+  <!-- POPUP 1 OF 3: OBJECTIVE -->
+  <div id="guide-modal-1" class="modal hidden">
     <div class="modal-content">
       <div class="guide-box">
         <div class="guide-box-title">Objective</div>
-        <p>Survive and maximize your research until the mission ends after <b>7 Sols (Moon days)</b>. Each Sol, you must choose how to run your lunar outpost and <b>Greenhouse Dome</b> (where your Botanist grows space plants for food, oxygen, and research) while collecting at least <b>50 Science Points</b> for Earth.</p>
+        <p>Survive and maximize your research until the mission ends after <b>7 Sols (Moon days)</b>.</p>
+        <p>Each Sol, you must choose how to run your lunar outpost and <b>Greenhouse Dome</b> (where your Botanist grows space plants for food, oxygen, and research), while collecting at least <b>50 Science Points</b> for Earth.</p>
       </div>
+      <button id="to-guide-2-btn" class="btn-primary">Next: Your Survival Tools</button>
+    </div>
+  </div>
 
+  <!-- POPUP 2 OF 3: TOOLS -->
+  <div id="guide-modal-2" class="modal hidden">
+    <div class="modal-content">
       <div class="guide-box">
         <div class="guide-box-title">Tools to Help You Survive</div>
-        <p>You will have <b>ONE water tank</b>. The water can be sent to certain machines and converted into other substances that help you survive. <b>Slide left</b> to send water to the Air Maker so your crew can breathe. <b>Slide right</b> to pump water into the Roof Shield to block dangerous space rays.</p>
+        <p>You will have <b>ONE water tank</b>. The water can be sent to certain machines and converted into other substances that help you survive.</p>
+        <p><b>Slide left</b> to send water to the Air Maker so your crew can breathe. <b>Slide right</b> to pump water into the Roof Shield to block dangerous space rays.</p>
       </div>
+      <button id="to-guide-3-btn" class="btn-primary">Next: Dangers to Watch Out For</button>
+    </div>
+  </div>
 
+  <!-- POPUP 3 OF 3: DANGERS -->
+  <div id="guide-modal-3" class="modal hidden">
+    <div class="modal-content">
       <div class="guide-box" style="border-color: #ef4444;">
         <div class="guide-box-title" style="color: #f87171;">Dangers to Watch Out For</div>
-        <ul>
-          <li><b>Solar Storms (Space Rays):</b> Giant blasts from the Sun hit the Moon with radiation. Keep your Roof Shield at <b>60% or higher</b> during solar flares so your crew does not get radiation sickness.</li>
-          <li><b>Freezing Shadows & Empty Tanks:</b> Lunar shadows plunge to minus 230 degrees. If Power, Water, or any astronaut's health bar reaches 0%, you must evacuate early without finishing your research.</li>
-        </ul>
+        <p><b>Solar Storms (Space Rays):</b> Giant blasts from the Sun hit the Moon with radiation. Keep your Roof Shield at <b>60% or higher</b> during solar flares so your crew does not get radiation sickness.</p>
+        <p><b>Freezing Shadows & Empty Tanks:</b> Lunar shadows plunge to -230 degrees. If Power, Water, or any astronaut's health bar reaches 0%, you must evacuate early without finishing your research.</p>
       </div>
-
       <button id="start-mission-btn" class="btn-primary">Start Mission (Sol 1)</button>
     </div>
   </div>
 
+  <!-- DECISION EVALUATION POPUP -->
   <div id="eval-modal" class="modal hidden">
     <div class="modal-content">
       <span class="speaker-pill">MISSION LOG</span>
@@ -81,10 +95,21 @@
         <div class="checkpoint-track" id="checkpoint-track"></div>
       </div>
       <div class="hud-meters">
-        <div class="hud-pill" id="pill-power">Power: <strong id="power-val">80%</strong></div>
-        <div class="hud-pill" id="pill-water">Water: <strong id="water-val">80%</strong></div>
-        <div class="hud-pill" id="pill-science">Science: <strong id="science-val">0 pts</strong></div>
-        <div class="hud-pill">Best: <strong id="best-val">0 pts</strong></div>
+        <div class="hud-pill" id="pill-power">
+          <div class="hud-pill-row"><span>Power:</span><strong id="power-val">80%</strong></div>
+          <div class="mini-bar-bg"><div class="mini-bar-fill" id="power-mini-bar" style="width: 80%"></div></div>
+        </div>
+        <div class="hud-pill" id="pill-water">
+          <div class="hud-pill-row"><span>Water:</span><strong id="water-val">80%</strong></div>
+          <div class="mini-bar-bg"><div class="mini-bar-fill" id="water-mini-bar" style="width: 80%"></div></div>
+        </div>
+        <div class="hud-pill" id="pill-science">
+          <div class="hud-pill-row"><span>Science:</span><strong id="science-val">0 pts</strong></div>
+          <div class="mini-bar-bg"><div class="mini-bar-fill" id="science-mini-bar" style="width: 0%; background: #38bdf8;"></div></div>
+        </div>
+        <div class="hud-pill">
+          <div class="hud-pill-row"><span>Best:</span><strong id="best-val">0 pts</strong></div>
+        </div>
         <button id="open-help-btn" class="btn-small">Mission Guide</button>
         <button id="data-mode-btn" class="btn-small">Data: Nov 2026 DONKI</button>
         <button id="judge-modal-btn" class="btn-small">NASA Data</button>
@@ -93,29 +118,55 @@
 
     <section class="story-stage" id="story-stage">
       <div class="earth-in-sky" title="Planet Earth"></div>
+
+      <!-- SIMPLE NASA ARTEMIS BASE SILHOUETTE IN BACKGROUND (NOTE 11) -->
+      <svg class="moon-base-bg" viewBox="0 0 800 90" preserveAspectRatio="none">
+        <rect x="65" y="25" width="8" height="65" fill="#334155"/>
+        <rect x="45" y="30" width="48" height="18" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+        <path d="M180 90 A80 55 0 0 1 340 90 Z" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+        <rect x="340" y="68" width="45" height="22" fill="#334155"/>
+        <path d="M385 90 A65 45 0 0 1 515 90 Z" fill="#132a24" stroke="#22c55e" stroke-width="2"/>
+        <line x1="680" y1="90" x2="680" y2="52" stroke="#475569" stroke-width="4"/>
+        <path d="M662 44 Q680 62 698 44" fill="none" stroke="#94a3b8" stroke-width="3"/>
+      </svg>
+
       <div class="stage-top-overlay">
         <div class="nasa-tag" id="card-source">Source: NASA Artemis Baseline</div>
         <div class="env-status" id="telemetry-tag">TEMP: +15°C | SUNLIT CRATER</div>
       </div>
+
       <div class="habitat-dome-shield">
         <div class="dome-shield-fill" id="diagram-shield-bar"></div>
         <span class="dome-shield-text" id="diagram-shield-text">ROOF WATER SHIELD: 50%</span>
       </div>
+
+      <!-- ENGINEER (LEFT), COMMANDER (MIDDLE), BOTANIST (RIGHT) (NOTE 3) -->
       <div class="cast-row">
-        <div class="actor-card" id="actor-card-1">
-          <div class="actor-avatar" id="crew-avatar-1"></div>
-          <div class="actor-name-tag" id="crew-name-1">Commander Maya</div>
-          <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-1" style="width: 100%"></div></div>
-        </div>
         <div class="actor-card" id="actor-card-2">
           <div class="actor-avatar" id="crew-avatar-2"></div>
           <div class="actor-name-tag" id="crew-name-2">Engineer Leo</div>
-          <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-2" style="width: 100%"></div></div>
+          <div class="actor-hp-row">
+            <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-2" style="width: 100%"></div></div>
+            <span class="actor-hp-text" id="crew-hp-2">100%</span>
+          </div>
         </div>
+
+        <div class="actor-card" id="actor-card-1">
+          <div class="actor-avatar" id="crew-avatar-1"></div>
+          <div class="actor-name-tag" id="crew-name-1">Commander Maya</div>
+          <div class="actor-hp-row">
+            <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-1" style="width: 100%"></div></div>
+            <span class="actor-hp-text" id="crew-hp-1">100%</span>
+          </div>
+        </div>
+
         <div class="actor-card" id="actor-card-3">
           <div class="actor-avatar" id="crew-avatar-3"></div>
           <div class="actor-name-tag" id="crew-name-3">Botanist Sam</div>
-          <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-3" style="width: 100%"></div></div>
+          <div class="actor-hp-row">
+            <div class="actor-hp-bar"><div class="actor-hp-fill" id="crew-bar-3" style="width: 100%"></div></div>
+            <span class="actor-hp-text" id="crew-hp-3">100%</span>
+          </div>
         </div>
       </div>
     </section>
@@ -148,6 +199,7 @@
     <div class="modal-content">
       <h2 id="debrief-title" style="text-align: center; font-size: 1.45rem;">Mission Complete</h2>
       <div class="debrief-story" id="debrief-story"></div>
+      <div class="sol-survived-line" id="sols-survived-text"></div>
       <button id="restart-btn" class="btn-primary">Try Again</button>
       <div class="retry-subtext">Try using a different strategy next!</div>
     </div>
@@ -158,8 +210,8 @@
       <h2 style="color: #facc15; margin-bottom: 10px;">NASA Open Data & Design Guide</h2>
       <div class="debrief-story" style="font-size: 0.9rem;">
         <p style="margin-bottom: 8px;"><b>NASA DONKI API:</b> Sols 3 and 6 use real 2026 Solar Flare events (Nov 7, 2026 M1.2 and Feb 1, 2026 X8.1) to drive radiation shielding trade-offs.</p>
-        <p style="margin-bottom: 8px;"><b>LRO Diviner & OSDR:</b> Models minus 230°C crater shadows, abrasive lunar regolith dust damage, and greenhouse plant stress.</p>
-        <p><b>Replayable Mastery:</b> Combines a 50-point mission completion threshold with a persistent High Score tracker to encourage strategic experimentation.</p>
+        <p style="margin-bottom: 8px;"><b>LRO Diviner & OSDR:</b> Models -230°C crater shadows, abrasive lunar regolith dust damage, and greenhouse plant stress.</p>
+        <p><b>Artemis Base Camp Design:</b> Incorporates NASA's inflatable habitat dome, greenhouse bio-module, vertical polar solar arrays, and 80% post-landing reserve baseline.</p>
       </div>
       <button id="close-judge-btn" class="btn-primary">Back to Mission</button>
     </div>
