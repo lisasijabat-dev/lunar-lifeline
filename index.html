@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lunar Lifeline | Junior Astronaut Mission Trainer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-badge">ARTEMIS MISSION CONTROL SIMULATOR</span>
+        <h1>LUNAR LIFELINE</h1>
+        <p class="tagline">One Water Tank. Two Survival Needs. Zero Free Choices.</p>
+      </div>
+      <div class="header-controls">
+        <div class="sol-badge" id="sol-counter">SOL 1 / 7</div>
+        <button id="data-mode-btn" class="btn-outline">Data Mode: Nov 2026 DONKI Archive</button>
+        <button id="judge-modal-btn" class="btn-info">For Judges & Teachers</button>
+      </div>
+    </header>
+
+    <section class="telemetry-grid">
+      <div class="meter-card">
+        <div class="meter-header"><span>Power Reserve</span><strong id="power-val">80%</strong></div>
+        <div class="bar-bg"><div id="power-bar" class="bar-fill green" style="width: 80%"></div></div>
+      </div>
+      <div class="meter-card">
+        <div class="meter-header"><span>Water Tank</span><strong id="water-val">80%</strong></div>
+        <div class="bar-bg"><div id="water-bar" class="bar-fill green" style="width: 80%"></div></div>
+      </div>
+      <div class="meter-card">
+        <div class="meter-header"><span>Crew Health</span><strong id="health-val">100%</strong></div>
+        <div class="bar-bg"><div id="health-bar" class="bar-fill green" style="width: 100%"></div></div>
+      </div>
+      <div class="meter-card">
+        <div class="meter-header"><span>Science Goal</span><strong id="science-val">0 / 50 pts</strong></div>
+        <div class="bar-bg"><div id="science-bar" class="bar-fill blue" style="width: 0%"></div></div>
+      </div>
+    </section>
+
+    <section class="crew-strip">
+      <div class="crew-card">
+        <div class="crew-info">
+          <div class="crew-avatar">CM</div>
+          <div><div class="crew-name">Cmdr. Maya</div><div class="crew-role">Flight & Power Systems</div></div>
+        </div>
+        <span class="crew-status" id="crew-status-1">NOMINAL</span>
+      </div>
+      <div class="crew-card">
+        <div class="crew-info">
+          <div class="crew-avatar">EL</div>
+          <div><div class="crew-name">Eng. Leo</div><div class="crew-role">Life Support & Shields</div></div>
+        </div>
+        <span class="crew-status" id="crew-status-2">NOMINAL</span>
+      </div>
+      <div class="crew-card">
+        <div class="crew-info">
+          <div class="crew-avatar">BS</div>
+          <div><div class="crew-name">Botanist Sam</div><div class="crew-role">Lunar Lab & Crops</div></div>
+        </div>
+        <span class="crew-status" id="crew-status-3">NOMINAL</span>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <section class="panel water-panel">
+        <h2>Dual-Use Water Lifeline</h2>
+        <p class="panel-desc">
+          Drag the slider before choosing an action each <span class="tooltip" data-tip="A lunar day/night cycle. On the Moon, 1 full Sol lasts about 29.5 Earth days.">Sol</span>. 
+          More <span class="tooltip" data-tip="Splitting water (H2O) with electricity to make breathable oxygen (O2).">Electrolysis</span> makes air to breathe, while roof water blocks cosmic rays.
+        </p>
+
+        <div class="habitat-diagram">
+          <div class="space-rays" id="solar-ray-banner">SOLAR RADIATION: BACKGROUND LEVEL</div>
+          <div class="roof-bladder-outer">
+            <div class="roof-water-fill" id="diagram-shield-bar"></div>
+            <span class="roof-label" id="diagram-shield-text">ROOF WATER SHIELD: 50%</span>
+          </div>
+          <div class="habitat-interior">
+            <div class="o2-chamber">
+              <div class="o2-fill" id="diagram-o2-bar"></div>
+              <span class="roof-label" id="diagram-o2-text">O2 AIR: 50%</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #94a3b8; text-align: right;">
+              <strong>HABITAT MODULE 01</strong><br />Shackleton Rim
+            </div>
+          </div>
+          <div class="lunar-ground">LUNAR REGOLITH SURFACE (89.9° S, 0.0° E)</div>
+        </div>
+
+        <div class="allocation-visual">
+          <div class="alloc-box oxygen-box"><span class="alloc-label">Oxygen (Electrolysis)</span><strong id="oxygen-pct">50%</strong></div>
+          <div class="alloc-box shield-box"><span class="alloc-label">Roof Radiation Shield</span><strong id="shield-pct">50%</strong></div>
+        </div>
+
+        <input type="range" id="water-slider" min="10" max="90" value="50" step="5" />
+        <div class="slider-hints"><span>More Breathable Air</span><span>More Storm Protection</span></div>
+        <div id="live-warning" class="warning-box">STATUS: Balanced allocation. Oxygen and roof shielding are both active.</div>
+      </section>
+
+      <section class="panel event-panel" id="event-panel">
+        <div class="sensor-viewport" id="sensor-viewport">
+          <div class="nasa-badge" id="card-source">Source: NASA Artemis ECLSS Baseline</div>
+          <span class="site-coords" id="telemetry-tag">TEMP: +15°C | SUNLIT RIM</span>
+        </div>
+        <h2 id="card-title">Sol 1: Touchdown at Shackleton Crater</h2>
+        <p id="card-text" class="event-text">
+          Your habitat landed on the Lunar South Pole. Sharp <span class="tooltip" data-tip="Jagged, powdery moon dust that clings to spacesuits and clogs machinery.">regolith</span> dust covers the landing zone, and solar arrays need alignment before temperatures drop.
+        </p>
+        <div id="turn-feedback" class="feedback-banner hidden"></div>
+        <div class="choices-grid" id="choices-container">
+          <button class="choice-btn" id="choice-a-btn"><strong>Option A: Calibrate Solar Arrays</strong><span>+20% Power | 0 Science</span></button>
+          <button class="choice-btn" id="choice-b-btn"><strong>Option B: Drill & Scan Crater Soil</strong><span>-10% Power | +15 Science</span></button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="debrief-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="debrief-title">Mission Complete</h2>
+      <p id="debrief-subtitle">Flight Director Engineering Report</p>
+      <ul id="debrief-lessons" class="lessons-list"></ul>
+      <button id="restart-btn" class="btn-primary">Play Again with New Strategy</button>
+    </div>
+  </div>
+
+  <div id="judge-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>NASA Data & Educational Design Guide</h2>
+      <p><strong>Target Audience:</strong> Ages 7–12 (Classroom & Home Browser Play — Zero Login Required)</p>
+      <ul class="lessons-list">
+        <li><strong>Core Engineering Trade-Off:</strong> Models real NASA ECLSS constraints where water is split between oxygen generation (electrolysis) and habitat radiation shielding bladders.</li>
+        <li><strong>NASA DONKI API:</strong> Sols 3 and 6 use real Solar Flare timestamps and intensity classes (Nov 7, 2026 M1.2 & Feb 1, 2026 X8.1 events) to trigger radiation emergencies.</li>
+        <li><strong>LRO Diviner Data:</strong> Sol 2 models real Lunar South Pole temperatures (+50°C sunlit rim vs. -230°C permanently shadowed crater floor).</li>
+        <li><strong>NASA OSDR:</strong> Sols 4 and 5 incorporate Open Science Data Repository findings on plant growth stress in regolith and spacewalk fatigue.</li>
+      </ul>
+      <button id="close-judge-btn" class="btn-primary">Back to Mission Control</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
