@@ -5,7 +5,7 @@ An interactive Junior Astronaut Mission Trainer (ages 7–12) built for the **20
 
 ## Core Engineering Trade-Off
 - **Dual-Use Water Lifeline:** Models real NASA ECLSS constraints by forcing players to split a single water reserve between **Electrolysis (Breathable Oxygen)** and **Roof Radiation Shielding Bladders**.
-- **Consequence-Driven Gameplay:** Every decision carries an immediate or delayed resource cost—no choice is free.
+- **Consequence-Driven Gameplay:** Every decision carries an immediate or delayed resource cost. No choice is free.
 
 ## Verified NASA Open Data Sources
 - **NASA DONKI (Space Weather Database):** Models real Solar Cycle 25 flare events, including the **November 7, 2026 M1.2 flare** (`2026-11-07T12:26:00-FLR-001`, GOES-P EXIS) and the **February 1, 2026 X8.1 superstorm**, plus a live DONKI API feed toggle.
