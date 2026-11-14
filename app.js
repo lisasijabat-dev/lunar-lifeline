@@ -2,7 +2,7 @@ let state = {
   sol: 1, maxSols: 7, power: 80, water: 80, health: 100, science: 0, oxygenSplit: 50,
   bestScore: parseInt(localStorage.getItem("lunarBestScore") || "0", 10),
   crewNames: ["Commander Maya", "Engineer Leo", "Botanist Sam"],
-  avatarStyles:,
+  avatarStyles: Array.of(0, 1, 2),
   liveMode: false, liveFlareLabel: "NASA DONKI: M1.2 Solar Flare (2026-11-07)",
   failReason: "", pendingGameOver: false
 };
