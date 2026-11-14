@@ -62,7 +62,7 @@ const events = Array.of(
     sol: 3, speakerIdx: 1, mode: "storm",
     source: "DYNAMIC_DONKI", tag: "ALERT: M1.2 SOLAR FLARE",
     title: "Sol 3: Solar Storm Warning!",
-    text: "\"Space weather alert! GOES-P sensors spotted an M1.2 solar flare shooting space rays at us. Slide your Roof Shield to at least 60% before choosing!\"",
+    text: "\"SPACE WEATHER ALERT! GOES-P sensors spotted an M1.2 solar flare shooting space rays at us! Slide your Roof Shield to at least 60% before choosing!\"",
     isStorm: true,
     choiceA: {
       label: "Power Down Science Lab & Take Shelter",
